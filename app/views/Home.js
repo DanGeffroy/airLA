@@ -1,6 +1,12 @@
 import React from 'react';
-import { Container, Header, Content, Card, CardItem, Text, Body } from 'native-base';
+import { Container, Header, Right } from 'native-base';
+import { Col, Row, Grid } from 'react-native-easy-grid';
+import { StyleSheet } from 'react-native';
+import {  H1 } from 'native-base';
+
 import axios from 'axios';
+import CityViewer from './CityViewer.js'
+import IndicatorViewer from './IndicatorViewer.js'
 
 export class Home extends React.Component {
  
@@ -10,7 +16,7 @@ export class Home extends React.Component {
 
     constructor(props){
         super(props);
-        axios.get(`https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=234400034_071-001_qualite-de-lair-indice-atmo-pays-de-la-loire-2017&facet=ville&facet=date`)
+        axios.get(`https://data.loire-atlantique.fr/api/records/1.0/search/?dataset=323266205_indice-atmo-previsionnel-agglomeration-nantaise`)
         .then(res => {
             console.log(res)
             const villes = res.data.records;
@@ -27,32 +33,27 @@ export class Home extends React.Component {
       }
     render() {
       return (
-        <Container>
-          <Header />
-          <Content>
-            <Card>
-              <CardItem header>
-                <Text>DENIS?!</Text>
-              </CardItem>
-              <CardItem>
-                <Body>
-                    
-                  <Text>
-                  {this.state.villes.map(ville =>
-                     ville.fields.ville
-                  )}
 
-                  </Text>
-                </Body>
-              </CardItem>
-              <CardItem footer>
-                <Text>SWAGGGGGGg</Text>
-              </CardItem>
-           </Card>
-          </Content>
+        <Container>
+            <Grid>
+              <Row style={[{ backgroundColor: '#ffca25'},styles.centered]}>
+                {this.state.villes[0]? <CityViewer fields={this.state.villes[1].fields}/> : null}
+              </Row>
+              <H1 style={[{ backgroundColor: '#5ddf88' ,color:'white',textAlign:'right',paddingRight:30}]}>Rapport détaillé</H1>
+              <Row style={[{ backgroundColor: '#5ddf88' }]}>
+                {this.state.villes[0]? <IndicatorViewer fields={this.state.villes[1].fields}/> : null}
+              </Row>
+            </Grid>
         </Container>
       );
     }
-  
-   
-  };
+
+};
+
+const styles = StyleSheet.create({
+  centered: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+});
