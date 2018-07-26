@@ -1,9 +1,6 @@
 import React from 'react';
-import { H1,H3,Text } from 'native-base';
 import { StyleSheet } from 'react-native';
-import { View } from 'react-native';
-
-
+import { Tile,Title ,Caption,Overlay,Subtitle,ImageBackground} from '@shoutem/ui';
 
 export default class Home extends React.Component {
  
@@ -27,12 +24,18 @@ export default class Home extends React.Component {
     }
     render() {
       return (
-        <View>
-            <H1 style={[styles.whiteText]}>{this.props.fields.ville}</H1>
-            <H3 style={[styles.whiteText]}>Indice de polution : {this.props.fields.indice}</H3>
-            <Text style={[styles.whiteText]}>La qualitée de l'aire est aujourd'hui</Text>
-            <Text style={[styles.whiteText]}>{this.isPollutionOK(this.props.fields.indice)}</Text>
-        </View>
+        <ImageBackground
+        styleName="large-banner"
+        source={{ uri:'https://images.unsplash.com/photo-1490277586285-9e4a6c6d6688?ixlib=rb-0.3.5&s=fc84a2683fc0ee96b65634fdb5263fb3&auto=format&fit=crop&w=1613&q=80'}}
+        >
+            <Tile styleName="text-centric">   
+                <Title styleName="md-gutter-bottom">{this.props.fields.ville}</Title>
+                <Caption>La qualitée de l'air est aujourd'hui</Caption>
+                <Overlay styleName="solid-dark">
+                    <Subtitle styleName="sm-gutter-horizontal">{this.isPollutionOK(this.props.fields.indice)}</Subtitle>
+                </Overlay>
+            </Tile>
+        </ImageBackground>
       );
     }
    
