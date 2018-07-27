@@ -4,9 +4,12 @@ import {Button, Icon, Text,  DropDownMenu,Screen} from '@shoutem/ui'
 import axios from 'axios';
 import CityViewer from './CityViewer.js'
 import IndicatorViewer from './IndicatorViewer.js'
+import {StackNavigator} from 'react-navigation'
 
 export class Home extends React.Component {
- 
+    static navigationOptions = {
+      header:null
+    }
     state = {
         villes : [],
         mods:[{
@@ -32,6 +35,7 @@ export class Home extends React.Component {
     }
 
     render() {
+      const {navigate}=this.props.navigation
       const selectedMod = this.state.selectedMod || this.state.mods[0];
 
       return (
@@ -48,7 +52,7 @@ export class Home extends React.Component {
                   valueProperty="mods"
                 />
               
-                {this.state.villes[0]? <IndicatorViewer fields={this.state.villes[selectedMod?selectedMod.value:this.state.mods[0].value].fields}/> : null}
+                {this.state.villes[0]? <IndicatorViewer navigate={navigate} fields={this.state.villes[selectedMod?selectedMod.value:this.state.mods[0].value].fields}/> : null}
                   <Button styleName="full-width clear" onPress={() => Linking.openURL('https://github.com/DanGeffroy/airLA')}>
                     <Text>Link to the github repo</Text>
                     <Icon name="github" />
