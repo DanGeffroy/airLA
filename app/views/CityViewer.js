@@ -30,7 +30,7 @@ export default class Home extends React.Component {
         >
             <Tile styleName="text-centric">   
                 <Title styleName="md-gutter-bottom">{this.props.fields.ville}</Title>
-                <Caption>La qualitée de l'air est aujourd'hui</Caption>
+                <Caption>{this.props.mode}</Caption>
                 <Overlay styleName="solid-dark">
                     <Subtitle styleName="sm-gutter-horizontal">{this.isPollutionOK(this.props.fields.indice)}</Subtitle>
                 </Overlay>

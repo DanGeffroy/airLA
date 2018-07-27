@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet,ScrollView, Linking} from 'react-native';
-import {View,Divider,Caption, Button, Icon, Text} from '@shoutem/ui'
+import {Button, Icon, Text,  DropDownMenu,Screen} from '@shoutem/ui'
 import axios from 'axios';
 import CityViewer from './CityViewer.js'
 import IndicatorViewer from './IndicatorViewer.js'
@@ -8,8 +8,19 @@ import IndicatorViewer from './IndicatorViewer.js'
 export class Home extends React.Component {
  
     state = {
-        villes : []
-    }
+        villes : [],
+        mods:[{
+          id:'today',
+          name:'Aujourd\'hui',
+          value:0,
+          longtext:'La qualitée de l\'air aujourd\'hui est'
+        },{
+          id:'preview',
+          name:'Demain',
+          value:1,
+          longtext:'La qualitée de l\'air demain est'
+        }]
+      }
     apiUrl = `https://data.loire-atlantique.fr/api/records/1.0/search/?dataset=323266205_indice-atmo-previsionnel-agglomeration-nantaise`
     constructor(props){
         super(props);
@@ -21,20 +32,29 @@ export class Home extends React.Component {
     }
 
     render() {
+      const selectedMod = this.state.selectedMod || this.state.mods[0];
+
       return (
-        <View styleName="flexible">
-              {this.state.villes[0]? <CityViewer fields={this.state.villes[1].fields}/> : null}
+        <Screen>
+              {this.state.villes[0]? <CityViewer mode={selectedMod?selectedMod.longtext:this.state.mods[0].longtext} fields={this.state.villes[selectedMod?selectedMod.value:this.state.mods[0].value].fields}/> : null}
               <ScrollView>
-                <Divider styleName="section-header">
-                  <Caption>Rapport détaillé</Caption>
-                </Divider>
-                {this.state.villes[0]? <IndicatorViewer fields={this.state.villes[1].fields}/> : null}
+         
+                <DropDownMenu
+                  styleName="horizontal"
+                  options={this.state.mods}
+                  selectedOption={selectedMod ? selectedMod : this.state.mods[0]}
+                  onOptionSelected={(mod) => this.setState({ selectedMod: mod })}
+                  titleProperty="name"
+                  valueProperty="mods"
+                />
+              
+                {this.state.villes[0]? <IndicatorViewer fields={this.state.villes[selectedMod?selectedMod.value:this.state.mods[0].value].fields}/> : null}
                   <Button styleName="full-width clear" onPress={() => Linking.openURL('https://github.com/DanGeffroy/airLA')}>
                     <Text>Link to the github repo</Text>
                     <Icon name="github" />
                   </Button>
               </ScrollView>
-        </View>
+        </Screen>
       );
     }
 

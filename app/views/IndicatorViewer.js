@@ -1,11 +1,10 @@
 import React from 'react';
 
 import { StyleSheet } from 'react-native';
-import { View,Text,Caption,Subtitle,Row,Divider} from '@shoutem/ui';
+import { View,Text,Caption,Subtitle,Row,Divider,Icon} from '@shoutem/ui';
 
 export default class IndicatorViewer extends React.Component {
  
-
     constructor(props){
         super(props);
     }
@@ -16,7 +15,7 @@ export default class IndicatorViewer extends React.Component {
         <View styleName="vertical">
           <View styleName="horizontal space-between">
             <Subtitle>{indicator.name} : {indicator.value}</Subtitle>
-            <Caption>{indicator.date}</Caption>
+            <Caption><Icon name="equalizer" /></Caption>
           </View>
           <Text styleName="multiline">{indicator.description}</Text>
         </View>
@@ -57,7 +56,3 @@ export default class IndicatorViewer extends React.Component {
       );
     }
   };
-
-  const styles = StyleSheet.create({
-
-  });
