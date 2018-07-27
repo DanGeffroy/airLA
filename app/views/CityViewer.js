@@ -4,7 +4,6 @@ import { Tile,Title ,Caption,Overlay,Subtitle,ImageBackground} from '@shoutem/ui
 
 export default class Home extends React.Component {
  
-
     constructor(props){
         super(props);
     }

@@ -1,10 +1,9 @@
 import React from 'react';
-import { StyleSheet,ScrollView, Linking} from 'react-native';
+import { StyleSheet,ScrollView, Linking,View} from 'react-native';
 import {Button, Icon, Text,  DropDownMenu,Screen} from '@shoutem/ui'
 import axios from 'axios';
 import CityViewer from './CityViewer.js'
 import IndicatorViewer from './IndicatorViewer.js'
-import {StackNavigator} from 'react-navigation'
 
 export class Home extends React.Component {
     static navigationOptions = {
@@ -53,11 +52,14 @@ export class Home extends React.Component {
                 />
               
                 {this.state.villes[0]? <IndicatorViewer navigate={navigate} fields={this.state.villes[selectedMod?selectedMod.value:this.state.mods[0].value].fields}/> : null}
-                  <Button styleName="full-width clear" onPress={() => Linking.openURL('https://github.com/DanGeffroy/airLA')}>
-                    <Text>Link to the github repo</Text>
-                    <Icon name="github" />
-                  </Button>
+                  
               </ScrollView>
+              <View style={styles.fixedBottom}>
+                    <Button styleName="full-width clear" onPress={() => Linking.openURL('https://github.com/DanGeffroy/airLA')}>
+                      <Text>Link to the github repo</Text>
+                      <Icon name="github" />
+                    </Button>
+                  </View>
         </Screen>
       );
     }
@@ -65,5 +67,12 @@ export class Home extends React.Component {
 };
 
 const styles = StyleSheet.create({
-  
+  fixedBottom:{
+    width: '100%', 
+    height: 50, 
+    justifyContent: 'center', 
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 0
+  }
 });
