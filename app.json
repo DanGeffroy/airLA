@@ -1,7 +1,12 @@
 {
   "expo": {
     "name": "AirLA",
-    "icon": "./app-logo.png",
+    "icon": "./app-logo2.png",
+    "splash":{
+      "image":"./splash.png",
+      "resizeMode":"contain",
+      "backgroundColor":"#ffffff"
+    },
     "version": "1.0.0",
     "slug": "AirLA",
     "sdkVersion": "27.0.0",
