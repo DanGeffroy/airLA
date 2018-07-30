@@ -39,7 +39,7 @@ $ npm start
 Install the [Expo](https://expo.io) app on your iOS or Android phone, and use the QR code in the terminal to open your app. Find the QR scanner on the Projects tab of the app.
 
 ### Install the current release on android
-If you want the current release you can find an unsigned APK inside the generated/generated folder.  
+If you want the current release you can find an unsigned APK inside the [generated](./generated) folder.  
 Simply install it on your android phone like any other app (you may need to allow unknown source in order to install it)
 
 
